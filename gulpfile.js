@@ -10,33 +10,54 @@ var templateCache = require('gulp-angular-templatecache');
 var gulpCopy = require('gulp-copy');
 var clean = require('gulp-clean');
 var mainBowerFiles = require('gulp-main-bower-files');
+var ngAnnotate = require('gulp-ng-annotate');
+var runSequence = require('run-sequence');
+var gulpFilter = require('gulp-filter');
+var debug = require('gulp-debug');
 
 /*
  * Compile SASS files into CSS and combine
  * into a single file, optimized for production
  */
 
-var sass_files = [
-    './src/css/bootstrap/css/bootstrap.min.css',
-    './src/css/palette.scss',
-    './src/css/app.scss',
-    './src/pages/**/*.scss' // include all individual page styles
-]
+
 
 gulp.task('sass', function() {
+
+  var sass_files = [
+      './src/css/bootstrap/css/bootstrap.min.css',
+      './src/css/palette.scss',
+      './src/css/app.scss',
+      './src/pages/**/*.scss' // include all individual page styles
+  ]
     console.log("Compiling SAAS...");
-    gulp.src(sass_files)
+    return gulp.src(sass_files)
         .pipe(concat("app.min.css"))
         .pipe(sass())
         .pipe(cleanCSS())
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('bowerfiles', function(){
+gulp.task('bowerfilesjs', function(){
+    var filterJS = gulpFilter('**/*.js');
     return gulp.src('./bower.json')
         .pipe(mainBowerFiles( ))
+        .pipe(filterJS)
+        //.pipe(debug({title: 'bowerfiles-js:'}))
         .pipe(concat("lib.min.js"))
         .pipe(uglify())
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('bowercss', function(){
+    var filterCSS = gulpFilter('**/*.scss');
+    return gulp.src('./bower.json')
+        .pipe(mainBowerFiles( ))
+        .pipe(filterCSS)
+        .pipe(debug({title: 'bowerfiles-css:'}))
+        .pipe(concat("lib.min.css"))
+        .pipe(sass())
+        .pipe(cleanCSS())
         .pipe(gulp.dest('./dist'));
 });
 
@@ -51,19 +72,20 @@ gulp.task('clean', function () {
  * optimized for production
  */
 
-var js_files = [
-    './src/js/app.js',
-    './src/pages/**/*.js', // include all pages
-    './src/services/*.js' // include all services
-];
 
 gulp.task('scripts', function() {
 
+  var js_files = [
+      './src/musicbox.js',
+      './src/musicbox.routes.js',
+      './src/**/*.js', // include all pages
+  ];
     console.log("Gulping JS...");
 
-    gulp.src(js_files)
+    return gulp.src(js_files)
         .pipe(concat("app.min.js"))
         .pipe(stripDebug())
+        .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest("./dist/"));
 
@@ -85,4 +107,5 @@ gulp.task('index', function() {
 });
 
 //gulp clean & gulp index & gulp bowerfiles & gulp html & gulp sass & gulp scripts
-gulp.task('default', [ 'index', 'bowerfiles', 'html', 'sass', 'scripts' ]);
+gulp.task('build', runSequence('clean',
+              [ 'index', 'bowerfilesjs','bowercss', 'html', 'sass', 'scripts' ]));

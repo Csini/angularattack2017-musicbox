@@ -1,9 +1,7 @@
-var musicbox = angular.module('musicbox', [
-	"ngRoute",
-	"dashboard"
-]);
+(function () {
+    'use strict';
 
-musicbox.config(['$locationProvider' ,'$routeProvider',
+angular.module('musicbox').config(['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
@@ -14,3 +12,4 @@ musicbox.config(['$locationProvider' ,'$routeProvider',
         otherwise('/dashboard');
     }
 ]);
+})();
