@@ -1,0 +1,25 @@
+{
+  "name": "musicbox",
+  "description": "Musicbox for AnularAttack 2017",
+  "main": "index.js",
+  "authors": [
+    "Csini"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "AngularAttack"
+  ],
+  "homepage": "https://github.com/Hackbit/angularattack2017-musicbox",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4"
+  }
+}
