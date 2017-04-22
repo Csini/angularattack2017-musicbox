@@ -1,9 +1,9 @@
-var jiffApp = angular.module('jiffApp', [
+var musicbox = angular.module('musicbox', [
 	"ngRoute",
 	"dashboard"
-]); 
+]);
 
-jiffApp.config(['$locationProvider' ,'$routeProvider',
+musicbox.config(['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
