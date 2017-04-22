@@ -1,0 +1,1 @@
+angular.module('musicbox').run(['$templateCache', function($templateCache) {$templateCache.put('pages/dashboard/dashboard.html','<div id="dashboard">\n\t<h1 class="heading">Angular Boilerplate 1.6</h1>\n\t<p>Setup with SASS, Gulp and BootStrap CSS</p>\n</div>\n');}]);
