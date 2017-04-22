@@ -1,35 +1,38 @@
 {
-  "name": "jiff",
+  "name": "musicbox",
   "version": "1.0.0",
-  "description": "Jiff Boilerplate App",
+  "description": "Musicbox for AnularAttack 2017",
   "main": "index.js",
+  "authors": [
+    "Csini <csini@gmx.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "AngularAttack"
+  ],
+  "homepage": "https://github.com/Hackbit/angularattack2017-musicbox",
   "scripts": {
-    "start": "http-server ./dist -c-1",
-    "build": "gulp clean & gulp",
+    "start": "npm run build && http-server ./dist -c-1",
+    "build": "gulp build",
     "watch": "gulp watch"
   },
-  "keywords": [
-    "Jiff",
-    "Angular",
-    "Boilerplate",
-    "Gulp",
-    "Angular",
-    "Angular",
-    "Seed"
-  ],
-  "author": "Achint Verma",
-  "license": "MIT",
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-angular": "^2.3.0",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^2.0.0",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^2.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^1.0.0",
+    "gulp-debug": "^3.1.0",
+    "gulp-filter": "^5.0.0",
     "gulp-main-bower-files": "^1.6.2",
-    "gulp-sass": "^3.0.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-sass": "^3.1.0",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^2.0.0",
-    "http-server": "^0.9.0"
+    "http-server": "^0.9.0",
+    "run-sequence": "^1.2.2"
   }
 }
